@@ -4,22 +4,37 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-public class Order implements Serializable{
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_order")
+public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private Instant moment;
-	
-	private User user;
-	
-	public Order() {};
 
-	public Order(Long id, Instant moment, User user) {
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private User client;
+
+	public Order() {
+	};
+
+	public Order(Long id, Instant moment, User client) {
 		super();
 		Id = id;
 		this.moment = moment;
-		this.user = user;
+		this.client = client;
 	}
 
 	public Long getId() {
@@ -39,11 +54,11 @@ public class Order implements Serializable{
 	}
 
 	public User getUser() {
-		return user;
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User client) {
+		this.client = client;
 	}
 
 	@Override
@@ -63,5 +78,4 @@ public class Order implements Serializable{
 		return Objects.equals(Id, other.Id);
 	}
 
-	
 }
