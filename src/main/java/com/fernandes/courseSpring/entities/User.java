@@ -1,6 +1,8 @@
 package com.fernandes.courseSpring.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -10,11 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tb_user")
+@Table(name = "tb_user")
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,8 +24,11 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
-	
-	public User() {}
+
+	private List<Order> orders = new ArrayList<>();
+
+	public User() {
+	}
 
 	public User(String name, String email, String phone, String password) {
 		this.name = name;
@@ -71,6 +76,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	};
 
 	@Override
 	public int hashCode() {
@@ -87,8 +96,5 @@ public class User implements Serializable {
 			return false;
 		User other = (User) obj;
 		return id == other.id;
-	};
-	
-	
-
+	}
 }
