@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.fernandes.courseSpring.entities.Category;
 import com.fernandes.courseSpring.entities.Order;
+import com.fernandes.courseSpring.entities.Product;
 import com.fernandes.courseSpring.entities.User;
 import com.fernandes.courseSpring.entities.enums.OrderStatus;
 import com.fernandes.courseSpring.repositories.CategoryRepository;
 import com.fernandes.courseSpring.repositories.OrderRepository;
+import com.fernandes.courseSpring.repositories.ProductRepository;
 import com.fernandes.courseSpring.repositories.UserRepository;
 
 @Configuration
@@ -28,9 +30,18 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	ProductRepository productRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Product p1 = new Product(null, "Smart Phone", "Celular dos bons", 3600.00, "");
+		Product p2 = new Product(null, "The Lord of the Rings", "Livro muito booom", 60.00, "");
+		Product p3 = new Product(null, "Smart TV", "TV com game e streans 42-polegadas", 2800.00, "");
+		Product p4 = new Product(null, "PC Gamer", "Melhor computador do mercado", 4820.50, "");
+		Product p5 = new Product(null, "Como ser um bom programador", "Livro de aprendizagem", 55.90, "");
 		
 		Category c1 = new Category(null, "Tecnology");
 		Category c2 = new Category(null, "Eletronic");
@@ -46,6 +57,7 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1 ,o2, o3));
 		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
 	}
 
