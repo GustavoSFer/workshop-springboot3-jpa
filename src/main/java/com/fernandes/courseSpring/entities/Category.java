@@ -1,9 +1,10 @@
 package com.fernandes.courseSpring.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,13 +16,16 @@ import jakarta.persistence.Table;
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	
-	public Category() {}
+
+	private Set<Product> prodocuts = new HashSet<>();
+
+	public Category() {
+	}
 
 	public Category(Long id, String name) {
 		super();
@@ -45,6 +49,10 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
+	public Set<Product> getProdocuts() {
+		return prodocuts;
+	};
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -60,7 +68,6 @@ public class Category implements Serializable {
 			return false;
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
-	};
-	
-	
+	}
+
 }
