@@ -59,6 +59,18 @@ public class TestConfig implements CommandLineRunner {
 		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
+		
+		// Depois de adicionar o produto e a categoria, ai sim posso fazer a associação dos dois
+		p1.getCategories().add(c2);
+		p2.getCategories().add(c3);
+		p3.getCategories().add(c1);
+		p3.getCategories().add(c2);
+		p4.getCategories().add(c1);
+		p4.getCategories().add(c2);
+		p5.getCategories().add(c3);
+		
+		// Após a associação é só salvar os produtos de novo
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 
 }
