@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.fernandes.courseSpring.entities.Category;
 import com.fernandes.courseSpring.entities.Order;
+import com.fernandes.courseSpring.entities.OrderItem;
 import com.fernandes.courseSpring.entities.Product;
 import com.fernandes.courseSpring.entities.User;
 import com.fernandes.courseSpring.entities.enums.OrderStatus;
 import com.fernandes.courseSpring.repositories.CategoryRepository;
+import com.fernandes.courseSpring.repositories.OrderItemRepository;
 import com.fernandes.courseSpring.repositories.OrderRepository;
 import com.fernandes.courseSpring.repositories.ProductRepository;
 import com.fernandes.courseSpring.repositories.UserRepository;
@@ -26,13 +28,16 @@ public class TestConfig implements CommandLineRunner {
 	private UserRepository userRepository;
 	
 	@Autowired
-	OrderRepository orderRepository;
+	private OrderRepository orderRepository;
 	
 	@Autowired
-	CategoryRepository categoryRepository;
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -71,6 +76,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		// Após a associação é só salvar os produtos de novo
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 10, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p2, 3, p2.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p4, 14, p4.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p1, 26, p1.getPrice());
+		OrderItem oi5 = new OrderItem(o3, p4, 100, p4.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
+		
 	}
 
 }
