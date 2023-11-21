@@ -1,7 +1,9 @@
 package com.fernandes.courseSpring.entities.pk;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fernandes.courseSpring.entities.Order;
 import com.fernandes.courseSpring.entities.Product;
